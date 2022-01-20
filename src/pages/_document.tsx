@@ -30,7 +30,7 @@ export default class Document extends NextDocument {
             }}
           />
         </Head>
-        <body className="antialiased">
+        <body className="antialiased bg-neutral-50">
           <Main />
           <NextScript />
         </body>
