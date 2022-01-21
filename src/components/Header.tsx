@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
+import Button from './Button';
+import { ThemeToggle } from './ThemeToggle';
 
 const MenuPopOver = () => {
   return (
@@ -28,7 +30,7 @@ const MenuPopOver = () => {
 
 export const Header = () => {
   return (
-    <header className="bg-white shadow-lg p-4 flex justify-between items-center">
+    <header className="bg-white dark:bg-slate-900/75 shadow-lg p-4 flex justify-between items-center">
       <div className="basis-1/3 grow-0  xl:hidden">
         <MenuPopOver />
       </div>
@@ -42,13 +44,20 @@ export const Header = () => {
           />
         </div>
         <div className="hidden xl:block">
-          <button>Companies</button>
+          <a href="#">Companies</a>
           <button>Jobs</button>
         </div>
       </div>
-      <div className="flex justify-end basis-1/3">
-        <button className="hidden md:block">For Employers</button>
-        <button>Sign In</button>
+      <div className="flex justify-end basis-1/3 gap-2 relative">
+        <ThemeToggle />
+        {/* <button className="hidden md:block">For Employers</button> */}
+        <Button variant="outline" className="hidden md:block">
+          For Employers
+        </Button>
+        <Button className="hidden md:block">Sign In</Button>
+        <Button variant="ghost" className="hidden md:block">
+          Sign In
+        </Button>
       </div>
     </header>
   );
