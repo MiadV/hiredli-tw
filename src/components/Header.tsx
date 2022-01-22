@@ -52,7 +52,7 @@ export const Header = () => {
             <LinkButton>Companies</LinkButton>
           </Link>
           <Link href="/#" passHref>
-            <LinkButton>Jobs</LinkButton>
+            <LinkButton>jobs</LinkButton>
           </Link>
         </div>
       </div>

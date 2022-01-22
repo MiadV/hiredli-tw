@@ -16,6 +16,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     let tempClassNames: string[] = [];
 
     const sharedClasses = [
+      'capitalize',
       'focus:outline-none',
       'focus:ring-2',
       'focus:ring-indigo-400',
@@ -80,6 +81,7 @@ export interface LinkButtonProps {
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
   ({ children, className, isExternal = false, ...rest }, ref) => {
     const sharedClasses = [
+      'capitalize',
       'bg-transparent',
       'hover:bg-indigo-50',
       'hover:text-indigo-700',
