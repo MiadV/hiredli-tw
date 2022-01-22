@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
-import Button from './Button';
+import { Button, LinkButton } from './Button';
 import { ThemeToggle } from './ThemeToggle';
 
 const MenuPopOver = () => {
@@ -30,34 +31,37 @@ const MenuPopOver = () => {
 
 export const Header = () => {
   return (
-    <header className="bg-white dark:bg-slate-900/75 shadow-lg p-4 flex justify-between items-center">
+    <header className="bg-white dark:bg-slate-900/75 shadow-lg py-3 px-8 flex justify-between items-center">
       <div className="basis-1/3 grow-0  xl:hidden">
         <MenuPopOver />
       </div>
       <div className="flex justify-center xl:justify-start basis-1/3 grow-0 shrink-0">
-        <div className="block w-[140px] h-auto xl:ml-0">
-          <Image
-            src="/img/hiredly-logo.png"
-            alt="logo"
-            width={958}
-            height={136}
-          />
-        </div>
-        <div className="hidden xl:block">
-          <a href="#">Companies</a>
-          <button>Jobs</button>
+        <Link href="/#">
+          <a className="flex w-[140px] xl:ml-0 my-auto">
+            <Image
+              src="/img/hiredly-logo.png"
+              alt="logo"
+              width={958}
+              height={136}
+              className="block"
+            />
+          </a>
+        </Link>
+        <div className="hidden xl:ml-2 xl:flex gap-2">
+          <Link href="/#" passHref>
+            <LinkButton>Companies</LinkButton>
+          </Link>
+          <Link href="/#" passHref>
+            <LinkButton>Jobs</LinkButton>
+          </Link>
         </div>
       </div>
       <div className="flex justify-end basis-1/3 gap-2 relative">
-        <ThemeToggle />
-        {/* <button className="hidden md:block">For Employers</button> */}
         <Button variant="outline" className="hidden md:block">
           For Employers
         </Button>
-        <Button className="hidden md:block">Sign In</Button>
-        <Button variant="ghost" className="hidden md:block">
-          Sign In
-        </Button>
+        <Button variant="ghost">Sign In</Button>
+        <ThemeToggle />
       </div>
     </header>
   );

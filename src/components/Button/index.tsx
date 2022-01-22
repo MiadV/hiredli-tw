@@ -8,7 +8,7 @@ export interface ButtonProps {
   variant?: 'solid' | 'outline' | 'ghost';
 }
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     { children, variant = 'solid', fullWidth = false, className, ...rest },
     ref
@@ -23,9 +23,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'focus:ring-offset-indigo-50',
       'font-semibold',
       'h-10',
-      'px-6',
+      'px-4',
       'rounded-full',
       'inline-flex',
+      'flex-shrink-0',
       'items-center',
       'justify-center',
       'transition-colors',
@@ -70,4 +71,51 @@ if (__DEV__) {
   Button.displayName = 'Button';
 }
 
-export default Button;
+export interface LinkButtonProps {
+  children: React.ReactNode;
+  className?: string;
+  isExternal?: boolean;
+}
+
+export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
+  ({ children, className, isExternal = false, ...rest }, ref) => {
+    const sharedClasses = [
+      'bg-transparent',
+      'hover:bg-indigo-50',
+      'hover:text-indigo-700',
+      'focus:outline-none',
+      'focus:ring-2',
+      'focus:ring-indigo-400',
+      'focus:ring-offset-2',
+      'focus:ring-offset-indigo-50',
+      'font-semibold',
+      'rounded-full',
+      'inline-flex',
+      'flex-shrink-0',
+      'items-center',
+      'justify-center',
+      'h-10',
+      'px-4',
+      'transition-colors',
+      'ease-in-out',
+      'duration-500',
+    ];
+
+    let classes = sharedClasses.join(' ');
+    return (
+      <a
+        className={`${classes} ${className}`}
+        target={isExternal ? '_blank' : undefined}
+        rel={isExternal ? 'noopener noreferrer' : undefined}
+        ref={ref}
+        {...rest}
+      >
+        {children}
+      </a>
+    );
+  }
+);
+
+if (__DEV__) {
+  LinkButton.displayName = 'LinkButton';
+}
