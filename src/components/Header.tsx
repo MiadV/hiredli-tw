@@ -1,23 +1,13 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { Button, LinkButton } from './Button';
+import { Button, IconButton } from './Button';
 import { ThemeToggle } from './ThemeToggle';
 
 const MenuPopOver = () => {
   return (
-    <button
-      type="button"
-      className="text-gray-500 w-8 h-8 flex items-center justify-center hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
-    >
-      <span className="sr-only">Navigation Menu</span>
-
-      <svg
-        aria-hidden="true"
-        className="h-6 w-6"
-        fill="none"
-        stroke="currentColor"
-      >
+    <IconButton variant="ghost" aria-label="Navigation Menu">
+      <svg className="h-6 w-6" fill="none" stroke="currentColor">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -25,13 +15,33 @@ const MenuPopOver = () => {
           d="M4 6h16M4 12h16M4 18h16"
         />
       </svg>
-    </button>
+    </IconButton>
+    // <button
+    //   type="button"
+    //   className="text-gray-500 w-8 h-8 flex items-center justify-center hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300"
+    // >
+    //   <span className="sr-only">Navigation Menu</span>
+
+    //   <svg
+    //     aria-hidden="true"
+    //     className="h-6 w-6"
+    //     fill="none"
+    //     stroke="currentColor"
+    //   >
+    //     <path
+    //       strokeLinecap="round"
+    //       strokeLinejoin="round"
+    //       strokeWidth={2}
+    //       d="M4 6h16M4 12h16M4 18h16"
+    //     />
+    //   </svg>
+    // </button>
   );
 };
 
 export const Header = () => {
   return (
-    <header className="bg-white dark:bg-slate-900/75 shadow-lg py-3 px-8 flex justify-between items-center">
+    <header className="bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
       <div className="basis-1/3 grow-0  xl:hidden">
         <MenuPopOver />
       </div>
@@ -49,10 +59,14 @@ export const Header = () => {
         </Link>
         <div className="hidden xl:ml-2 xl:flex gap-2">
           <Link href="/#" passHref>
-            <LinkButton>Companies</LinkButton>
+            <Button variant="ghost" as="a">
+              Companies
+            </Button>
           </Link>
           <Link href="/#" passHref>
-            <LinkButton>jobs</LinkButton>
+            <Button variant="ghost" as="a">
+              jobs
+            </Button>
           </Link>
         </div>
       </div>
@@ -60,7 +74,7 @@ export const Header = () => {
         <Button variant="outline" className="hidden md:block">
           For Employers
         </Button>
-        <Button variant="ghost">Sign In</Button>
+        <Button variant="solid">Sign In</Button>
         <ThemeToggle />
       </div>
     </header>

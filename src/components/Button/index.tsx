@@ -1,16 +1,28 @@
-import React, { forwardRef } from 'react';
+import React, { Component, forwardRef } from 'react';
 import { __DEV__ } from '@/utils/assertions';
+
+/* === Button Element === */
 
 export interface ButtonProps {
   children: React.ReactNode;
   fullWidth?: boolean;
   className?: string;
   variant?: 'solid' | 'outline' | 'ghost';
+  as?: string;
+  isExternal?: boolean;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { children, variant = 'solid', fullWidth = false, className, ...rest },
+    {
+      children,
+      variant = 'solid',
+      fullWidth = false,
+      className,
+      as = 'button',
+      isExternal = false,
+      ...rest
+    },
     ref
   ) => {
     let tempClassNames: string[] = [];
@@ -24,7 +36,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'focus:ring-offset-indigo-50',
       'font-semibold',
       'h-10',
-      'px-4',
+      'px-3',
       'rounded-full',
       'inline-flex',
       'flex-shrink-0',
@@ -60,11 +72,26 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     let classes = tempClassNames.join(' ');
-    return (
+
+    let Element = as ? (
+      React.createElement(
+        as,
+        {
+          className: `${classes} ${className}`,
+          target: isExternal ? '_blank' : undefined,
+          rel: isExternal ? 'noopener noreferrer' : undefined,
+          ref,
+          ...rest,
+        },
+        children
+      )
+    ) : (
       <button {...rest} className={`${classes} ${className}`} ref={ref}>
         {children}
       </button>
     );
+
+    return Element;
   }
 );
 
@@ -72,52 +99,42 @@ if (__DEV__) {
   Button.displayName = 'Button';
 }
 
-export interface LinkButtonProps {
-  children: React.ReactNode;
-  className?: string;
-  isExternal?: boolean;
+/* === IconButton Element === */
+
+export interface IconButtonProps extends ButtonProps {
+  icon?: React.ReactElement;
+  'aria-label': string;
 }
 
-export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  ({ children, className, isExternal = false, ...rest }, ref) => {
-    const sharedClasses = [
-      'capitalize',
-      'bg-transparent',
-      'hover:bg-indigo-50',
-      'hover:text-indigo-700',
-      'focus:outline-none',
-      'focus:ring-2',
-      'focus:ring-indigo-400',
-      'focus:ring-offset-2',
-      'focus:ring-offset-indigo-50',
-      'font-semibold',
-      'rounded-full',
-      'inline-flex',
-      'flex-shrink-0',
-      'items-center',
-      'justify-center',
-      'h-10',
-      'px-4',
-      'transition-colors',
-      'ease-in-out',
-      'duration-500',
-    ];
+export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ children, icon, className, 'aria-label': ariaLabel, ...rest }, ref) => {
+    const sharedClasses = ['rounded-full', '!px-0', 'w-10'];
+
+    /**
+     * Passing the icon as prop or children should work
+     */
+    const element = icon || children;
+    const _children = React.isValidElement(element)
+      ? React.cloneElement(element as any, {
+          'aria-hidden': true,
+          focusable: false,
+        })
+      : null;
 
     let classes = sharedClasses.join(' ');
     return (
-      <a
+      <Button
         className={`${classes} ${className}`}
-        target={isExternal ? '_blank' : undefined}
-        rel={isExternal ? 'noopener noreferrer' : undefined}
-        ref={ref}
+        aria-label={ariaLabel}
         {...rest}
+        ref={ref}
       >
-        {children}
-      </a>
+        {_children}
+      </Button>
     );
   }
 );
 
 if (__DEV__) {
-  LinkButton.displayName = 'LinkButton';
+  IconButton.displayName = 'IconButton';
 }
