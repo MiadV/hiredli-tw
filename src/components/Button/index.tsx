@@ -3,7 +3,7 @@ import { __DEV__ } from '@/utils/assertions';
 
 /* === Button Element === */
 
-export interface ButtonProps {
+export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
   children: React.ReactNode;
   fullWidth?: boolean;
   className?: string;
@@ -51,16 +51,20 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     let btnSolid = ['bg-indigo-600', 'hover:bg-indigo-700', 'text-white'];
     let btnOutline = [
+      'dark:text-white',
+      'hover:text-indigo-700',
+      'hover:dark:text-indigo-700',
       'bg-transparent',
       'hover:bg-indigo-50',
-      'hover:text-indigo-700',
       'border',
       'border-indigo-600',
     ];
     let btnGhost = [
       'bg-transparent',
+      'dark:text-white',
       'hover:bg-indigo-50',
       'hover:text-indigo-700',
+      'hover:dark:text-indigo-700',
     ];
 
     if (variant === 'solid') {
@@ -86,6 +90,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         children
       )
     ) : (
+      // @ts-ignore
       <button {...rest} className={`${classes} ${className}`} ref={ref}>
         {children}
       </button>
