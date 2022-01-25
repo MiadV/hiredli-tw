@@ -5,24 +5,19 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button, IconButton } from './Button';
 import { ThemeSelect, ThemeToggle } from './ThemeToggle';
+import Logo from './Logo';
 
 export const Header = () => {
   return (
-    <header className="bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
-      <MenuPopOver className="basis-1/3 grow-0 " display="xl:hidden" />
-      <div className="flex justify-center xl:justify-start basis-1/3 grow-0 shrink-0">
+    <header className="sticky z-20 top-0 inset-x-0 bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
+      <MenuPopOver className="basis-1/3 grow-0 " display="md:hidden" />
+      <div className="flex justify-center md:justify-start basis-1/3 grow-0 shrink-0">
         <Link href="/#">
-          <a className="flex w-[140px] xl:ml-0 my-auto">
-            <Image
-              src="/img/hiredly-logo.png"
-              alt="logo"
-              width={958}
-              height={136}
-              className="block"
-            />
+          <a className="flex w-[140px] md:ml-0 my-auto">
+            <Logo />
           </a>
         </Link>
-        <div className="hidden xl:ml-2 xl:flex gap-2">
+        <div className="hidden md:flex gap-2 md:ml-2">
           <Link href="/#" passHref>
             <Button variant="ghost" as="a">
               Companies
@@ -100,13 +95,7 @@ const MenuPopOver = ({ className, display }: any) => {
 
           <div className="fixed top-0 bottom-0 left-0 w-full max-w-xs rounded-lg shadow-lg p-6 bg-white dark:bg-gray-800 ">
             <a className="flex w-[140px] mx-auto mt-4">
-              <Image
-                src="/img/hiredly-logo.png"
-                alt="logo"
-                width={958}
-                height={136}
-                className="block"
-              />
+              <Logo />
             </a>
             <ul className="space-y-3 mt-8">
               <li className="group relative hover:bg-slate-200/50 h-9 flex items-center rounded-md overflow-hidden">
