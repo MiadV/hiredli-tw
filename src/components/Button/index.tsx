@@ -1,15 +1,19 @@
-import React, { Component, forwardRef } from 'react';
+import React, { forwardRef } from 'react';
 import { __DEV__ } from '@/utils/assertions';
+
+type BaseButtonProps = Omit<React.HTMLProps<HTMLButtonElement>, 'size'>;
 
 /* === Button Element === */
 
-export interface ButtonProps extends React.HTMLProps<HTMLButtonElement> {
+export interface ButtonProps extends BaseButtonProps {
   children: React.ReactNode;
   fullWidth?: boolean;
   className?: string;
   variant?: 'solid' | 'outline' | 'ghost';
+  size?: 'sm' | 'md' | 'lg';
   as?: string;
   isExternal?: boolean;
+  type?: 'button' | 'submit' | 'reset';
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -17,6 +21,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     {
       children,
       variant = 'solid',
+      size = 'md',
       fullWidth = false,
       className,
       as = 'button',
@@ -35,8 +40,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       'focus:ring-offset-2',
       'focus:ring-offset-indigo-50',
       'font-semibold',
-      'h-10',
-      'px-3',
       'rounded-full',
       'inline-flex',
       'flex-shrink-0',
@@ -49,6 +52,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
     if (fullWidth) sharedClasses.push('w-full');
 
+    // handle variants
     let btnSolid = ['bg-indigo-600', 'hover:bg-indigo-700', 'text-white'];
     let btnOutline = [
       'dark:text-white',
@@ -75,6 +79,19 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       tempClassNames = [...sharedClasses, ...btnGhost];
     }
 
+    // handle sizes
+    let sizeSm = ['h-8', 'px-2'];
+    let sizeMd = ['h-10', 'px-3'];
+    let sizeLg = ['h-12', 'px-4'];
+
+    if (size === 'sm') {
+      tempClassNames = [...tempClassNames, ...sizeSm];
+    } else if (size === 'md') {
+      tempClassNames = [...tempClassNames, ...sizeMd];
+    } else if (size === 'lg') {
+      tempClassNames = [...tempClassNames, ...sizeLg];
+    }
+
     let classes = tempClassNames.join(' ');
 
     let Element = as ? (
@@ -90,7 +107,6 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         children
       )
     ) : (
-      // @ts-ignore
       <button {...rest} className={`${classes} ${className}`} ref={ref}>
         {children}
       </button>
@@ -112,8 +128,31 @@ export interface IconButtonProps extends ButtonProps {
 }
 
 export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ children, icon, className, 'aria-label': ariaLabel, ...rest }, ref) => {
-    const sharedClasses = ['rounded-full', '!px-0', 'w-10'];
+  (
+    {
+      children,
+      icon,
+      className,
+      'aria-label': ariaLabel,
+      size = 'md',
+      ...rest
+    },
+    ref
+  ) => {
+    let sharedClasses = ['rounded-full', '!px-0'];
+
+    // handle sizes
+    let sizeSm = ['w-8'];
+    let sizeMd = ['w-10'];
+    let sizeLg = ['w-12'];
+
+    if (size === 'sm') {
+      sharedClasses = [...sharedClasses, ...sizeSm];
+    } else if (size === 'md') {
+      sharedClasses = [...sharedClasses, ...sizeMd];
+    } else if (size === 'lg') {
+      sharedClasses = [...sharedClasses, ...sizeLg];
+    }
 
     /**
      * Passing the icon as prop or children should work
@@ -131,6 +170,7 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
       <Button
         className={`${classes} ${className}`}
         aria-label={ariaLabel}
+        size={size}
         {...rest}
         ref={ref}
       >
