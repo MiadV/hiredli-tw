@@ -80,7 +80,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     // handle sizes
-    let sizeSm = ['h-8', 'px-2'];
+    let sizeSm = ['h-8', 'px-2', 'text-sm'];
     let sizeMd = ['h-10', 'px-3'];
     let sizeLg = ['h-12', 'px-4', 'text-lg'];
 
