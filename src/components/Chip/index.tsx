@@ -16,7 +16,7 @@ export const Chip: React.FC<ChipProps> = ({
   return (
     <span
       className={clsx(
-        'capitalize inline-flex justify-center items-center py-1.5 px-3 rounded-full text-sm cursor-pointer border border-slate-400 transition-colors ease-in-out duration-500',
+        'capitalize inline-flex justify-center items-center hover:dark:text-indigo-700 py-1.5 px-3 rounded-full text-sm cursor-pointer border border-slate-400 transition-colors ease-in-out duration-500',
         className,
         [
           active
