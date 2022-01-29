@@ -1,4 +1,10 @@
 import '@/css/fonts.css';
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/free-mode';
+import 'swiper/css/scrollbar';
+import 'swiper/css/navigation';
+//
 import '@/css/main.css';
 import type { AppProps } from 'next/app';
 import { Fragment } from 'react';
@@ -20,7 +26,7 @@ function MyApp({
 
   return (
     <>
-      <TitleMeta suffix="Hiredly">{meta?.title}</TitleMeta>
+      <TitleMeta suffix='Hiredly'>{meta?.title}</TitleMeta>
       <Header />
       <Layout {...layoutPropsObj}>
         <Component {...pageProps} />

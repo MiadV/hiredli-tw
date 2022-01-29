@@ -14,7 +14,7 @@ export default class Document extends NextDocument {
 
   render() {
     return (
-      <Html lang="en" className="dark">
+      <Html lang='en' className='dark'>
         <Head>
           <script
             dangerouslySetInnerHTML={{
@@ -30,7 +30,7 @@ export default class Document extends NextDocument {
             }}
           />
         </Head>
-        <body className="antialiased bg-neutral-50 dark:bg-gray-800 text-slate-900 dark:text-white dark:highlight-white/5">
+        <body className='antialiased bg-neutral-100 dark:bg-gray-800 text-slate-900 dark:text-white dark:highlight-white/5'>
           <Main />
           <NextScript />
         </body>
