@@ -5,42 +5,54 @@ import Link from 'next/link';
 import { Button, IconButton } from './Button';
 import { ThemeSelect, ThemeToggle } from './ThemeToggle';
 import Logo from './Logo';
+import { AuthenticationDialog } from './AuthenticationDialog';
 
-export const Header: React.FC<{}> = () => {
+export const Header: React.FC = () => {
+  const [showAuth, setShowAuth] = useState(true);
   return (
-    <header className="sticky z-20 top-0 inset-x-0 bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
-      <MenuPopOver className="basis-1/3 grow-0 " display="md:hidden" />
-      <div className="flex justify-center md:justify-start basis-1/3 grow-0 shrink-0">
-        <Link href="/#">
-          <a className="flex w-[140px] md:ml-0 my-auto">
-            <Logo />
-          </a>
-        </Link>
-        <div className="hidden md:flex gap-2 md:ml-2">
-          <Link href="/#" passHref>
-            <Button variant="ghost" as="a">
-              Companies
-            </Button>
+    <>
+      <header className="sticky z-20 top-0 inset-x-0 bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
+        <MenuPopOver className="basis-1/3 grow-0 " display="md:hidden" />
+        <div className="flex justify-center md:justify-start basis-1/3 grow-0 shrink-0">
+          <Link href="/#">
+            <a className="flex w-[140px] md:ml-0 my-auto">
+              <Logo />
+            </a>
           </Link>
-          <Link href="/#" passHref>
-            <Button variant="ghost" as="a">
-              jobs
-            </Button>
-          </Link>
+          <div className="hidden md:flex gap-2 md:ml-2">
+            <Link href="/#" passHref>
+              <Button variant="ghost" as="a">
+                Companies
+              </Button>
+            </Link>
+            <Link href="/#" passHref>
+              <Button variant="ghost" as="a">
+                jobs
+              </Button>
+            </Link>
+          </div>
         </div>
-      </div>
-      <div className="flex justify-end basis-1/3 gap-2 relative">
-        <Link href="/#" passHref>
-          <Button as="a" variant="outline" className="hidden md:inline-flex">
-            For Employers
+        <div className="flex justify-end basis-1/3 gap-2 relative">
+          <Link href="/#" passHref>
+            <Button as="a" variant="outline" className="hidden md:inline-flex">
+              For Employers
+            </Button>
+          </Link>
+          <Button
+            variant="solid"
+            className="hidden md:inline-flex"
+            onClick={() => setShowAuth(true)}
+          >
+            Sign In
           </Button>
-        </Link>
-        <Button variant="solid" className="hidden md:inline-flex">
-          Sign In
-        </Button>
-        <ThemeToggle />
-      </div>
-    </header>
+          <ThemeToggle />
+        </div>
+      </header>
+      <AuthenticationDialog
+        isOpen={showAuth}
+        onClose={() => setShowAuth(false)}
+      />
+    </>
   );
 };
 
@@ -77,7 +89,6 @@ const MenuPopOver = ({ className, display }: any) => {
         <Dialog
           as="div"
           className={clsx('fixed z-50 inset-0 ', display)}
-          // open={isOpen}
           onClose={setIsOpen}
         >
           <Transition.Child
