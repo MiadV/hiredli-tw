@@ -8,7 +8,7 @@ export default function Logo() {
         'text-3xl font-black tracking-widest align-middle text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-800 via-purple-600 to-indigo-800'
       )}
     >
-      HIREDLY
+      HIREDLi
     </span>
   );
 }
