@@ -19,25 +19,10 @@ function update() {
   });
 }
 
-let settings = [
-  {
-    value: 'light',
-    label: 'Light',
-    icon: SunIcon,
-  },
-  {
-    value: 'dark',
-    label: 'Dark',
-    icon: MoonIcon,
-  },
-  {
-    value: 'system',
-    label: 'System',
-    icon: PcIcon,
-  },
-];
-
-function SunIcon({ selected, ...props }) {
+const SunIcon: React.FC<{ selected?: boolean; className?: string }> = ({
+  selected,
+  ...props
+}) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -63,9 +48,12 @@ function SunIcon({ selected, ...props }) {
       />
     </svg>
   );
-}
+};
 
-function MoonIcon({ selected, ...props }) {
+const MoonIcon: React.FC<{ selected?: boolean; className?: string }> = ({
+  selected,
+  ...props
+}) => {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
@@ -90,9 +78,12 @@ function MoonIcon({ selected, ...props }) {
       />
     </svg>
   );
-}
+};
 
-function PcIcon({ selected, ...props }) {
+const PcIcon: React.FC<{ selected?: boolean; className?: string }> = ({
+  selected,
+  ...props
+}) => {
   return (
     <svg viewBox="0 0 24 24" fill="none" {...props}>
       <path
@@ -116,7 +107,25 @@ function PcIcon({ selected, ...props }) {
       />
     </svg>
   );
-}
+};
+
+let settings = [
+  {
+    value: 'light',
+    label: 'Light',
+    icon: SunIcon,
+  },
+  {
+    value: 'dark',
+    label: 'Dark',
+    icon: MoonIcon,
+  },
+  {
+    value: 'system',
+    label: 'System',
+    icon: PcIcon,
+  },
+];
 
 function useTheme() {
   let [setting, setSetting] = useState('system');
@@ -163,11 +172,11 @@ function useTheme() {
     };
   }, []);
 
-  return [setting, setSetting];
+  return { setting, setSetting };
 }
 
 export function ThemeToggle({ panelClassName = 'mt-4' }) {
-  let [setting, setSetting] = useTheme();
+  let { setting, setSetting } = useTheme();
 
   return (
     <Listbox value={setting} onChange={setSetting}>
@@ -212,9 +221,9 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
 }
 
 export function ThemeSelect() {
-  let [setting, setSetting] = useTheme();
+  let { setting, setSetting } = useTheme();
 
-  let { label } = settings.find((x) => x.value === setting);
+  let option = settings.find((x) => x.value === setting);
 
   return (
     <div className="flex items-center justify-between">
@@ -248,7 +257,7 @@ export function ThemeSelect() {
             className="fill-gray-400"
           />
         </svg>
-        {label}
+        {option!.label}
         <svg className="w-6 h-6 ml-2 text-gray-400" fill="none">
           <path
             d="m15 11-3 3-3-3"
