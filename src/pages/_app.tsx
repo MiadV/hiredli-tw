@@ -26,7 +26,7 @@ function MyApp({
 
   return (
     <>
-      <TitleMeta suffix='Hiredly'>{meta?.title}</TitleMeta>
+      <TitleMeta suffix="Hiredli">{meta?.title}</TitleMeta>
       <Header />
       <Layout {...layoutPropsObj}>
         <Component {...pageProps} />
