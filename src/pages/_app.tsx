@@ -6,8 +6,9 @@ import 'swiper/css/scrollbar';
 import 'swiper/css/navigation';
 //
 import '@/css/main.css';
-import type { AppProps } from 'next/app';
 import { Fragment } from 'react';
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
 import { Header } from '@/components/Header';
 import { LayoutProps } from '@/types';
 import { TitleMeta } from '@/components/TitleMeta';
@@ -25,13 +26,13 @@ function MyApp({
   const meta = layoutProps && layoutProps.meta;
 
   return (
-    <>
+    <ThemeProvider attribute="class" defaultTheme="system">
       <TitleMeta suffix="Hiredli">{meta?.title}</TitleMeta>
       <Header />
       <Layout {...layoutPropsObj}>
         <Component {...pageProps} />
       </Layout>
-    </>
+    </ThemeProvider>
   );
 }
 
