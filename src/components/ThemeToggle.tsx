@@ -1,23 +1,8 @@
-import { Fragment, useEffect, useRef, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import { Listbox } from '@headlessui/react';
+import { useTheme } from 'next-themes';
 import clsx from 'clsx';
-import { useIsomorphicLayoutEffect } from '@/hooks/useIsomorphicLayoutEffect';
 import { IconButton } from './Button';
-
-function update() {
-  if (
-    localStorage.theme === 'dark' ||
-    (!('theme' in localStorage) &&
-      window.matchMedia('(prefers-color-scheme: dark)').matches)
-  ) {
-    document.documentElement.classList.add('dark', 'changing-theme');
-  } else {
-    document.documentElement.classList.remove('dark', 'changing-theme');
-  }
-  window.setTimeout(() => {
-    document.documentElement.classList.remove('changing-theme');
-  });
-}
 
 const SunIcon: React.FC<{ selected?: boolean; className?: string }> = ({
   selected,
@@ -127,69 +112,33 @@ let settings = [
   },
 ];
 
-function useTheme() {
-  let [setting, setSetting] = useState('system');
-  let initial = useRef(true);
-
-  useIsomorphicLayoutEffect(() => {
-    let theme = localStorage.theme;
-    if (theme === 'light' || theme === 'dark') {
-      setSetting(theme);
-    }
-  }, []);
-
-  useIsomorphicLayoutEffect(() => {
-    if (setting === 'system') {
-      localStorage.removeItem('theme');
-    } else if (setting === 'light' || setting === 'dark') {
-      localStorage.theme = setting;
-    }
-    if (initial.current) {
-      initial.current = false;
-    } else {
-      update();
-    }
-  }, [setting]);
-
-  useEffect(() => {
-    let mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    mediaQuery.addEventListener('change', update);
-
-    function onStorage() {
-      update();
-      let theme = localStorage.theme;
-      if (theme === 'light' || theme === 'dark') {
-        setSetting(theme);
-      } else {
-        setSetting('system');
-      }
-    }
-    window.addEventListener('storage', onStorage);
-
-    return () => {
-      mediaQuery.removeEventListener('change', update);
-      window.removeEventListener('storage', onStorage);
-    };
-  }, []);
-
-  return { setting, setSetting };
-}
-
 export function ThemeToggle({ panelClassName = 'mt-4' }) {
-  let { setting, setSetting } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, theme, setTheme } = useTheme();
+
+  // When mounted on client, now we have resolved the theme
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
 
   return (
-    <Listbox value={setting} onChange={setSetting}>
+    <Listbox value={theme} onChange={setTheme}>
       <Listbox.Label className="sr-only">Theme</Listbox.Label>
       <Listbox.Button type="button">
         <span className="dark:hidden">
           <IconButton as="span" variant="outline" aria-label="light theme">
-            <SunIcon className="w-6 h-6" selected={setting !== 'system'} />
+            <SunIcon
+              className="w-6 h-6"
+              selected={resolvedTheme !== 'system'}
+            />
           </IconButton>
         </span>
         <span className="hidden dark:inline">
           <IconButton as="span" variant="outline" aria-label="dark theme">
-            <MoonIcon className="w-6 h-6" selected={setting !== 'system'} />
+            <MoonIcon
+              className="w-6 h-6"
+              selected={resolvedTheme !== 'system'}
+            />
           </IconButton>
         </span>
       </Listbox.Button>
@@ -221,9 +170,15 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
 }
 
 export function ThemeSelect() {
-  let { setting, setSetting } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme, theme, setTheme } = useTheme();
 
-  let option = settings.find((x) => x.value === setting);
+  // When mounted on client, now we have resolved the theme
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) return null;
+
+  let option = settings.find((x) => x.value === resolvedTheme);
 
   return (
     <div className="flex items-center justify-between">
@@ -269,8 +224,8 @@ export function ThemeSelect() {
         </svg>
         <select
           id="theme"
-          value={setting}
-          onChange={(e) => setSetting(e.target.value)}
+          value={theme}
+          onChange={(e) => setTheme(e.target.value)}
           className="absolute appearance-none inset-0 w-full h-full opacity-0"
         >
           {settings.map(({ value, label }) => (
