@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import { Button, IconButton } from './Button';
-import { Transition } from '@headlessui/react';
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { Button, IconButton } from "./Button";
+import { Transition } from "@headlessui/react";
 
 const Hero = () => {
   const [showBanner, setShowBanner] = useState(true);
   return (
     <>
-      <div className="relative bg-red-500/20 w-full h-[640px] sm:h-[55vh] md:h-[440px]">
+      <div className="relative h-[640px] w-full bg-red-500/20 sm:h-[55vh] md:h-[440px]">
         <Image
           src="/img/corporate.jpg"
           alt="corporate"
@@ -15,18 +15,18 @@ const Hero = () => {
           objectFit="cover"
         />
         <div className="absolute inset-0 bg-neutral-900/70">
-          <div className="max-w-screen-lg mx-auto">
-            <div className="min-h-[60px] m-6">
+          <div className="mx-auto max-w-screen-lg">
+            <div className="m-6 min-h-[60px]">
               <HeroInnerBanner
                 show={showBanner}
                 onClose={() => setShowBanner(false)}
               />
             </div>
-            <div className="flex flex-col items-center text-center mx-4 mt-16">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold uppercase tracking-wide text-white">
+            <div className="mx-4 mt-16 flex flex-col items-center text-center">
+              <h1 className="text-3xl font-extrabold uppercase tracking-wide text-white sm:text-4xl md:text-5xl lg:text-6xl">
                 discover your future
               </h1>
-              <span className="mt-6 text-xl sm:text-2xl text-white">
+              <span className="mt-6 text-xl text-white sm:text-2xl">
                 find your next job
               </span>
 
@@ -58,7 +58,7 @@ const HeroInnerBanner: React.FC<{ show: boolean; onClose: () => void }> = ({
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="relative py-3 px-8 rounded md:rounded-full text-white text-center shadow-lg bg-gradient-to-r from-purple-500 to-indigo-800">
+      <div className="relative rounded bg-gradient-to-r from-purple-500 to-indigo-800 py-3 px-8 text-center text-white shadow-lg md:rounded-full">
         <p>
           Welcome to <span className="font-bold">HIREDLi</span>. An easier and
           faster job discovery platform.
@@ -90,10 +90,10 @@ const HeroInnerBanner: React.FC<{ show: boolean; onClose: () => void }> = ({
   );
 };
 
-const items = ['graphic designer', 'software developer', 'architecture'];
+const items = ["graphic designer", "software developer", "architecture"];
 
 const SearchForm = () => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [isDirty, setIsDirty] = useState(false);
 
   useEffect(() => {
@@ -120,9 +120,9 @@ const SearchForm = () => {
     >
       <div
         id="form-control"
-        className="flex items-center bg-white rounded-full shadow-md group-focus-within:ring-2 group-focus-within:ring-indigo-400 group-focus-within:ring-offset-2 group-focus-within:ring-offset-transparent overflow-hidden"
+        className="flex items-center overflow-hidden rounded-full bg-white shadow-md group-focus-within:ring-2 group-focus-within:ring-indigo-400 group-focus-within:ring-offset-2 group-focus-within:ring-offset-transparent"
       >
-        <span className="block px-2 pointer-events-none text-slate-400 group-focus-within:text-indigo-800">
+        <span className="pointer-events-none block px-2 text-slate-400 group-focus-within:text-indigo-800">
           <svg
             className="h-6 w-6"
             fill="none"
@@ -138,14 +138,14 @@ const SearchForm = () => {
           </svg>
         </span>
         <input
-          className="appearance-none p-2 w-full text-xl leading-6 text-slate-900 placeholder-slate-400 border-transparent focus:border-transparent focus:ring-0"
+          className="w-full appearance-none border-transparent p-2 text-xl leading-6 text-slate-900 placeholder-slate-400 focus:border-transparent focus:ring-0"
           type="text"
           aria-label="Search input"
           placeholder="Job Title..."
           onClick={() => {
             if (!isDirty) {
               setIsDirty(true);
-              setQuery('');
+              setQuery("");
             }
           }}
           value={query}
@@ -153,7 +153,7 @@ const SearchForm = () => {
         />
         <button
           type="submit"
-          className="hidden sm:block shrink-0 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold h-11 px-2 transition-colors ease-in-out duration-500"
+          className="hidden h-11 shrink-0 bg-indigo-600 px-2 font-semibold text-white transition-colors duration-500 ease-in-out hover:bg-indigo-700 sm:block"
         >
           Discover Now
         </button>
@@ -168,11 +168,11 @@ const SearchForm = () => {
 function HeroBottomCard() {
   return (
     <div className="bg-neutral-900 p-4">
-      <span className="block text-lg text-white text-center">
-        No time to look for jobs? Drop your resume with{' '}
-        <span className="text-2xl font-black tracking-widest align-middle text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-700 via-purple-500 to-indigo-500">
+      <span className="block text-center text-lg text-white">
+        No time to look for jobs? Drop your resume with{" "}
+        <span className="bg-gradient-to-r from-fuchsia-700 via-purple-500 to-indigo-500 bg-clip-text align-middle text-2xl font-black tracking-widest text-transparent">
           HIREDLi-X
-        </span>{' '}
+        </span>{" "}
         headhunters here.
       </span>
     </div>

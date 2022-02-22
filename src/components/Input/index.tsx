@@ -1,6 +1,6 @@
-import clsx from 'clsx';
-import React, { forwardRef } from 'react';
-import { __DEV__ } from '../../utils/assertions';
+import clsx from "clsx";
+import React, { forwardRef } from "react";
+import { __DEV__ } from "../../utils/assertions";
 
 export interface InputProps extends React.HTMLProps<HTMLInputElement> {
   name: string;
@@ -22,23 +22,23 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       errorText,
       placeholder,
       required = false,
-      type = 'text',
+      type = "text",
       ...otherProps
     },
     ref
   ) => {
     return (
-      <div className='relative'>
+      <div className="relative">
         <input
           id={id}
           name={name}
           type={type}
           className={clsx(
-            'bg-slate-200 rounded-full pl-4 peer h-10 w-full border-0 text-gray-900 focus:ring-2',
-            'focus:ring-indigo-400',
-            'focus:ring-offset-2',
-            'focus:ring-offset-indigo-50',
-            isInvalid ? 'border-red-600 focus:ring-red-600' : '',
+            "peer h-10 w-full rounded-full border-0 bg-slate-200 pl-4 text-gray-900 focus:ring-2",
+            "focus:ring-indigo-400",
+            "focus:ring-offset-2",
+            "focus:ring-offset-indigo-50",
+            isInvalid ? "border-red-600 focus:ring-red-600" : "",
             className
           )}
           placeholder={placeholder}
@@ -47,8 +47,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         />
         {isInvalid && errorText && (
           <span
-            className='block text-left pl-4 mt-1 text-sm text-red-600'
-            id='error'
+            className="mt-1 block pl-4 text-left text-sm text-red-600"
+            id="error"
           >
             {errorText}
           </span>
@@ -61,5 +61,5 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 export default Input;
 
 if (__DEV__) {
-  Input.displayName = 'Input';
+  Input.displayName = "Input";
 }

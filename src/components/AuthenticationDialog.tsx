@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Dialog, Tab, Transition } from '@headlessui/react';
-import clsx from 'clsx';
-import Logo from './Logo';
-import { Button, IconButton } from './Button';
-import Input from './Input';
+import React, { Fragment } from "react";
+import { Dialog, Tab, Transition } from "@headlessui/react";
+import clsx from "clsx";
+import Logo from "./Logo";
+import { Button, IconButton } from "./Button";
+import Input from "./Input";
 
 export const AuthenticationDialog: React.FC<{
   isOpen: boolean;
@@ -46,17 +46,17 @@ export const AuthenticationDialog: React.FC<{
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden align-middle transition-all transform bg-white dark:bg-gray-800 shadow-xl rounded-2xl">
-                <span className="flex w-[140px] mx-auto ">
+              <div className="my-8 inline-block w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 align-middle shadow-xl transition-all dark:bg-gray-800">
+                <span className="mx-auto flex w-[140px] ">
                   <Logo />
                 </span>
                 <Tab.Group>
-                  <Tab.List className="mt-4 flex rounded-lg bg-indigo-100 dark:text-gray-500 overflow-hidden">
+                  <Tab.List className="mt-4 flex overflow-hidden rounded-lg bg-indigo-100 dark:text-gray-500">
                     <Tab
                       className={({ selected }) =>
                         clsx(
-                          'w-full py-2.5 leading-5 font-medium',
-                          selected ? 'bg-indigo-700 text-white' : ''
+                          "w-full py-2.5 font-medium leading-5",
+                          selected ? "bg-indigo-700 text-white" : ""
                         )
                       }
                     >
@@ -65,8 +65,8 @@ export const AuthenticationDialog: React.FC<{
                     <Tab
                       className={({ selected }) =>
                         clsx(
-                          'w-full py-2.5 leading-5 font-medium ',
-                          selected ? 'bg-indigo-700 text-white' : ''
+                          "w-full py-2.5 font-medium leading-5 ",
+                          selected ? "bg-indigo-700 text-white" : ""
                         )
                       }
                     >
@@ -84,24 +84,24 @@ export const AuthenticationDialog: React.FC<{
                 </Tab.Group>
 
                 <div className="my-4 flex items-center">
-                  <span className="block w-full h-0.5 bg-slate-400"></span>
-                  <span className="relative text-lg font-semibold px-3">
+                  <span className="block h-0.5 w-full bg-slate-400"></span>
+                  <span className="relative px-3 text-lg font-semibold">
                     Or
                   </span>
-                  <span className="block w-full h-0.5 bg-slate-400"></span>
+                  <span className="block h-0.5 w-full bg-slate-400"></span>
                 </div>
 
                 <div className="space-y-3">
                   <Button fullWidth variant="outline">
-                    <FacebookColorfulIcon className="w-6 h-6" />
+                    <FacebookColorfulIcon className="h-6 w-6" />
                     <span className="pl-2"> continue with facebook</span>
                   </Button>
                   <Button fullWidth variant="outline">
-                    <GoogleColorfulIcon className="w-6 h-6" />
+                    <GoogleColorfulIcon className="h-6 w-6" />
                     <span className="pl-2"> continue with google</span>
                   </Button>
                   <Button fullWidth variant="outline">
-                    <LinkedinColorfulIcon className="w-6 h-6" />
+                    <LinkedinColorfulIcon className="h-6 w-6" />
                     <span className="pl-2"> continue with linkedin</span>
                   </Button>
                 </div>
@@ -114,7 +114,7 @@ export const AuthenticationDialog: React.FC<{
                 >
                   <svg
                     viewBox="0 0 10 10"
-                    className="w-2.5 h-2.5 overflow-visible"
+                    className="h-2.5 w-2.5 overflow-visible"
                     aria-hidden="true"
                   >
                     <path
@@ -137,7 +137,7 @@ export const AuthenticationDialog: React.FC<{
 
 const SignInForm = () => {
   return (
-    <div className="px-10 pt-4 pb-4 rounded-tr-4xl">
+    <div className="rounded-tr-4xl px-10 pt-4 pb-4">
       <h1 className="text-2xl font-semibold">Welcome back!</h1>
       <form className="mt-6 space-y-6" autoComplete="off">
         <Input
@@ -165,7 +165,7 @@ const SignInForm = () => {
 
       <a
         href="#"
-        className="block mt-4 hover:text-indigo-800 hover:font-semibold dark:text-gray-300 dark:hover:text-white hover:underline transition-all duration-150"
+        className="mt-4 block transition-all duration-150 hover:font-semibold hover:text-indigo-800 hover:underline dark:text-gray-300 dark:hover:text-white"
       >
         Forgot your password ?
       </a>
@@ -175,7 +175,7 @@ const SignInForm = () => {
 
 const SignUpFrom = () => {
   return (
-    <div className="px-10 pt-4 pb-4 rounded-tr-4xl">
+    <div className="rounded-tr-4xl px-10 pt-4 pb-4">
       <h1 className="text-2xl font-semibold">Register free!</h1>
       <form className="mt-6 space-y-6" autoComplete="off">
         <Input
@@ -203,22 +203,22 @@ const SignUpFrom = () => {
 
       <p className="mt-4 text-sm">
         By clicking “Sign Up” above, you acknowledge that you have read and
-        agreed to our{' '}
+        agreed to our{" "}
         <a
           href=""
           className="font-semibold underline hover:text-indigo-700 dark:hover:text-indigo-400"
         >
-          {' '}
+          {" "}
           Terms & Conditions
-        </a>{' '}
-        and{' '}
+        </a>{" "}
+        and{" "}
         <a
           href=""
           className="font-semibold underline hover:text-indigo-700 dark:hover:text-indigo-400"
         >
-          {' '}
+          {" "}
           Privacy Policy
-        </a>{' '}
+        </a>{" "}
         .
       </p>
     </div>

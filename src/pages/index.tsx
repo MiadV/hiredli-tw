@@ -11,7 +11,7 @@ export default function Home() {
     <>
       <SEO />
       <Hero />
-      <main className='max-w-screen-xl mx-auto px-6 sm:px-8'>
+      <main className='mx-auto max-w-screen-xl px-6 sm:px-8'>
         <div className='mt-16 space-y-20'>
           <FeaturedJobs />
           <LatestJobs />

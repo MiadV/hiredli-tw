@@ -1,29 +1,29 @@
-import React, { Fragment, useState } from 'react';
-import { Dialog, Transition } from '@headlessui/react';
-import clsx from 'clsx';
-import Link from 'next/link';
-import { Button, IconButton } from './Button';
-import { ThemeSelect, ThemeToggle } from './ThemeToggle';
-import Logo from './Logo';
-import { AuthenticationDialog } from './AuthenticationDialog';
+import React, { Fragment, useState } from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import clsx from "clsx";
+import Link from "next/link";
+import { Button, IconButton } from "./Button";
+import { ThemeSelect, ThemeToggle } from "./ThemeToggle";
+import Logo from "./Logo";
+import { AuthenticationDialog } from "./AuthenticationDialog";
 
 export const Header: React.FC = () => {
   const [showAuth, setShowAuth] = useState(true);
   return (
     <>
-      <header className="sticky z-20 top-0 inset-x-0 bg-white dark:bg-slate-900/75 shadow-lg py-2 sm:py-3 px-2 sm:px-8 flex justify-between items-center">
+      <header className="sticky inset-x-0 top-0 z-20 flex items-center justify-between bg-white py-2 px-2 shadow-lg dark:bg-slate-900/75 sm:py-3 sm:px-8">
         <MenuPopOver
-          className="basis-1/3 grow-0 "
+          className="grow-0 basis-1/3 "
           display="md:hidden"
           setShowAuth={setShowAuth}
         />
-        <div className="flex justify-center md:justify-start basis-1/3 grow-0 shrink-0">
+        <div className="flex shrink-0 grow-0 basis-1/3 justify-center md:justify-start">
           <Link href="/#">
-            <a className="flex w-[140px] md:ml-0 my-auto">
+            <a className="my-auto flex w-[140px] md:ml-0">
               <Logo />
             </a>
           </Link>
-          <div className="hidden md:flex gap-2 md:ml-2">
+          <div className="hidden gap-2 md:ml-2 md:flex">
             <Link href="/#" passHref>
               <Button variant="ghost" as="a">
                 Companies
@@ -36,7 +36,7 @@ export const Header: React.FC = () => {
             </Link>
           </div>
         </div>
-        <div className="flex justify-end basis-1/3 gap-2 relative">
+        <div className="relative flex basis-1/3 justify-end gap-2">
           <Link href="/#" passHref>
             <Button as="a" variant="outline" className="hidden md:inline-flex">
               For Employers
@@ -92,7 +92,7 @@ const MenuPopOver = ({ className, display, setShowAuth }: any) => {
       >
         <Dialog
           as="div"
-          className={clsx('fixed z-50 inset-0 ', display)}
+          className={clsx("fixed inset-0 z-50 ", display)}
           onClose={setIsOpen}
         >
           <Transition.Child
@@ -107,33 +107,33 @@ const MenuPopOver = ({ className, display, setShowAuth }: any) => {
             <Dialog.Overlay className="fixed inset-0 bg-black/20 backdrop-blur-sm dark:bg-gray-900/80" />
           </Transition.Child>
 
-          <div className="fixed top-0 bottom-0 left-0 w-full max-w-xs rounded-r-xl shadow-lg p-6 bg-white dark:bg-gray-800 ">
-            <a className="flex w-[140px] mx-auto mt-4">
+          <div className="fixed top-0 bottom-0 left-0 w-full max-w-xs rounded-r-xl bg-white p-6 shadow-lg dark:bg-gray-800 ">
+            <a className="mx-auto mt-4 flex w-[140px]">
               <Logo />
             </a>
-            <ul className="space-y-3 mt-8">
-              <li className="group relative hover:bg-slate-200/50 h-9 flex items-center rounded-md overflow-hidden">
+            <ul className="mt-8 space-y-3">
+              <li className="group relative flex h-9 items-center overflow-hidden rounded-md hover:bg-slate-200/50">
                 <span className="absolute h-full w-2 bg-indigo-700 opacity-0 transition-all group-hover:opacity-100" />
                 <Link href="/#" passHref>
-                  <a className="font-medium w-full group-hover:pl-3 transition-all">
+                  <a className="w-full font-medium transition-all group-hover:pl-3">
                     Companies
                   </a>
                 </Link>
               </li>
-              <li className="group relative hover:bg-slate-200/50 h-9 flex items-center rounded-md overflow-hidden">
+              <li className="group relative flex h-9 items-center overflow-hidden rounded-md hover:bg-slate-200/50">
                 <span className="absolute h-full w-2 bg-indigo-700 opacity-0 transition-all group-hover:opacity-100" />
                 <Link href="/#" passHref>
-                  <a className="font-medium w-full group-hover:pl-3 transition-all">
+                  <a className="w-full font-medium transition-all group-hover:pl-3">
                     Jobs
                   </a>
                 </Link>
               </li>
             </ul>
 
-            <div className="mt-6 pt-6 border-t border-gray-200 dark:border-gray-200/10">
+            <div className="mt-6 border-t border-gray-200 pt-6 dark:border-gray-200/10">
               <ThemeSelect />
             </div>
-            <ul className="space-y-3 mt-8 border-t border-gray-200 dark:border-gray-200/10">
+            <ul className="mt-8 space-y-3 border-t border-gray-200 dark:border-gray-200/10">
               <li>
                 <Button
                   variant="solid"
@@ -160,7 +160,7 @@ const MenuPopOver = ({ className, display, setShowAuth }: any) => {
             >
               <svg
                 viewBox="0 0 10 10"
-                className="w-2.5 h-2.5 overflow-visible"
+                className="h-2.5 w-2.5 overflow-visible"
                 aria-hidden="true"
               >
                 <path
