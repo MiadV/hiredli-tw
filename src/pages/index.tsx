@@ -4,13 +4,15 @@ import { Footer } from '@/components/Footer';
 import { FeaturedJobs } from '@/components/FeaturedJobs';
 import { LatestJobs } from '@/components/LatestJobs';
 import { TopCompanies } from '@/components/TopCompanies';
+import SEO from '@/components/SEO';
 
 export default function Home() {
   return (
     <>
+      <SEO />
       <Hero />
-      <main className="max-w-screen-xl mx-auto px-6 sm:px-8">
-        <div className="mt-16 space-y-20">
+      <main className='max-w-screen-xl mx-auto px-6 sm:px-8'>
+        <div className='mt-16 space-y-20'>
           <FeaturedJobs />
           <LatestJobs />
           <TopCompanies />
@@ -20,11 +22,3 @@ export default function Home() {
     </>
   );
 }
-
-Home.defaultProps = {
-  layoutProps: {
-    meta: {
-      title: 'Find Jobs | Vacancies & Career opportunities',
-    },
-  },
-};
