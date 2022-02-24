@@ -10,6 +10,8 @@
 
 This project is built using [React.js](https://reactjs.org/), [Next.js](https://nextjs.org/), [Tailwind CSS](https://tailwindcss.com/), [Typescript](https://www.typescriptlang.org/).
 
+[**👉View Live**](https://hiredli-tw-miadv.vercel.app/)
+
 ![Job Seeking Landing Page](/preview.png)
 
 ### Folder Structure
