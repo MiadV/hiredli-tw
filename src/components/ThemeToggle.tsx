@@ -126,7 +126,7 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
       <Listbox.Label className='sr-only'>Theme</Listbox.Label>
       <Listbox.Button type='button'>
         <span className='dark:hidden'>
-          <IconButton as='span' variant='outline' aria-label='light theme'>
+          <IconButton as='span' variant='ghost' aria-label='light theme'>
             <SunIcon
               className='h-6 w-6'
               selected={resolvedTheme !== 'system'}
@@ -134,7 +134,7 @@ export function ThemeToggle({ panelClassName = 'mt-4' }) {
           </IconButton>
         </span>
         <span className='hidden dark:inline'>
-          <IconButton as='span' variant='outline' aria-label='dark theme'>
+          <IconButton as='span' variant='ghost' aria-label='dark theme'>
             <MoonIcon
               className='h-6 w-6'
               selected={resolvedTheme !== 'system'}
